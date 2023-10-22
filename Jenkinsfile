@@ -23,11 +23,11 @@ agent { label 'workstation' }
               branch 'main'
             }
           }
-         }
+     }
 
    stage('deploy to production') {
      when {
-              expression { env.TAG_NAME ==~ ".*" }
+              expression { env.TAG_NAME ==~ '.*' }
           }
           //if tag is there in this branch then only deploy to prod
           steps {
