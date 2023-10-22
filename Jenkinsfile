@@ -35,8 +35,6 @@ agent { label 'workstation' }
             echo 'CI'
             }
            }
-
-
   }
 }
 
