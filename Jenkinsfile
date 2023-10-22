@@ -15,11 +15,17 @@ agent { label 'workstation' }
      echo 'ok'
      }
    }
-     //no unit test since it is static code.
+     stage('Unit Tests'){
+          when {
+            allOf {
+              expression { env.TAG_NAME != env.GIT_BRANCH }
+              branch 'main'
+            }
+          }
 
    stage('deploy to production') {
      when {
-             expression { env.TAG_NAME != env.GIT_BRANCH }
+              expression { env.TAG_NAME ==~ ".*" }
           }
           //if tag is there in this branch then only deploy to prod
           steps {
