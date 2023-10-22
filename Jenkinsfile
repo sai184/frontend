@@ -14,6 +14,7 @@ agent { label 'workstation' }
      when {
             expression { env.TAG_NAME ==~ ".*" }
           }
+          //if tag is there in this branch then only deploy to prod
           steps {
             sh 'env'
             echo 'CI'
