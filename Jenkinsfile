@@ -12,7 +12,9 @@ agent { label 'workstation' }
 
    stage('deploy to production') {
     steps{
+      sh 'env'
       echo 'CI'
+
       }
      }
  }
