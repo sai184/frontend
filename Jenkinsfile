@@ -5,6 +5,7 @@ agent { label 'workstation' }
   stage('code quality') {
   when {
           allOf {
+            branch 'main'
             expression { env.TAG_NAME != env.GIT_BRANCH }
           }
         }
