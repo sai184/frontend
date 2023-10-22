@@ -11,16 +11,20 @@ agent { label 'workstation' }
      //no unit test since it is static code.
 
    stage('deploy to production') {
-    steps{
-      sh 'env'
-      echo 'CI'
+     when {
+            expression { env.TAG_NAME ==~ ".*" }
+          }
+          steps {
+            sh 'env'
+            echo 'CI'
+            }
+           }
 
-      }
-     }
- }
+
+}
 }
 
-//j
+//'*' means any file matches anything when condtion in jenkins
 //annyalsis report will come from qualitygate
 
 //here pipeline is failing yy beacuse in code it has some errror we cant do anything our job is just desghin pipeline
