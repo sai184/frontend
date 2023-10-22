@@ -22,6 +22,7 @@ agent { label 'workstation' }
               branch 'main'
             }
           }
+         }
 
    stage('deploy to production') {
      when {
@@ -35,7 +36,7 @@ agent { label 'workstation' }
            }
 
 
-}
+  }
 }
 
 //'*' means any file matches anything when condtion in jenkins
