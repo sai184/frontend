@@ -1,41 +1,44 @@
-pipeline {
-  agent { label 'workstation'}
-
-  stages {
-
-    stage('Code Quality'){
-      when {
-        allOf {
-          expression { env.TAG_NAME != env.GIT_BRANCH }
+pipeline{
+agent { label 'workstation' }
+ stages{
+ //no dependencies since it is static code.
+  stage('code quality') {
+  when {
+          allOf {
+            branch 'main'
+            expression { env.TAG_NAME != env.GIT_BRANCH }
+          }
         }
-      }
-      steps {
-        // sh 'sonar-scanner -Dsonar.host.url=http://172.31.39.191:9000 -Dsonar.login=admin -Dsonar.password=admin123 -Dsonar.projectKey=frontend -Dsonar.qualitygate.wait=true'
-        echo 'OK'
-      }
-    }
 
-    stage('Unit Tests'){
-      when {
-        allOf {
-          expression { env.TAG_NAME != env.GIT_BRANCH }
-          branch 'main'
-        }
-      }
-      steps {
-        // Ideally we should run the tests , But here the developer have skipped it. So assuming those are good and proceeding
-        // sh 'npm test'
-        echo 'CI'
-      }
-    }
+   steps{
+    // sh 'sonar-scanner -Dsonar.host.url=http://172.31.39.191:9000 -Dsonar.login=admin -Dsonar.password=admin123 -Dsonar.projectKey=frontend -Dsonar.qualitygate.wait=true'
+     echo 'ok'
+     }
+   }
+     stage('Unit Tests'){
+          when {
+            allOf {
+              expression { env.TAG_NAME != env.GIT_BRANCH }
+              branch 'main'
+            }
+          }
+         }
 
-    stage('Release'){
-      when {
-        expression { env.TAG_NAME ==~ ".*" }
-      }
+   stage('deploy to production') {
+     when {
+              expression { env.TAG_NAME ==~ ".*" }
+          }
+          //if tag is there in this branch then only deploy to prod
+          steps {
+            sh 'env'
+            echo 'CI'
+            }
+           }
 
-    }
 
   }
-
 }
+
+//'*' means any file matches anything when condtion in jenkins
+//annyalsis report will come from qualitygate
+//here pipeline is failing yy beacuse in code it has some errror we cant do anything our job is just desghin pipeline
