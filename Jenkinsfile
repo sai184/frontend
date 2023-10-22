@@ -1,6 +1,6 @@
-pipeline{
+pipeline {
 agent { label 'workstation' }
- stages{
+ stages {
  //no dependencies since it is static code.
   stage('code quality') {
   when {
@@ -11,12 +11,12 @@ agent { label 'workstation' }
         }
 
 
-   steps{
+   steps {
     // sh 'sonar-scanner -Dsonar.host.url=http://172.31.39.191:9000 -Dsonar.login=admin -Dsonar.password=admin123 -Dsonar.projectKey=frontend -Dsonar.qualitygate.wait=true'
      echo 'ok'
      }
    }
-     stage('Unit Tests'){
+     stage('Unit Tests') {
           when {
             allOf {
               expression { env.TAG_NAME != env.GIT_BRANCH }
