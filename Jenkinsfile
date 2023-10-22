@@ -18,7 +18,7 @@ agent { label 'workstation' }
 
    stage('deploy to production') {
      when {
-            expression { env.TAG_NAME ==~ ".*" }
+             expression { env.TAG_NAME != env.GIT_BRANCH }
           }
           //if tag is there in this branch then only deploy to prod
           steps {
