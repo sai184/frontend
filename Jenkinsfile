@@ -6,7 +6,7 @@ agent { label 'workstation' }
   when {
           allOf {
             branch 'main'
-            expression { env.TAG_NAME != env.GIT_BRANCH }
+            expression { TAG_NAME != GIT_BRANCH }
           }
         }
 
