@@ -16,33 +16,8 @@ agent { label 'workstation' }
      echo 'ok'
      }
    }
-     stage('Unit Tests') {
-          when {
-            allOf {
-              expression { env.TAG_NAME != env.GIT_BRANCH }
-              branch 'main'
-            }
-          }
-           steps {
-
-                  // sh 'npm test'
-                  echo 'CI'
-                }
-          }
-
-
-   stage('Release') {
-     when {
-              expression { env.TAG_NAME ==~ ".*" }
-          }
-          //if tag is there in this branch then only deploy to prod
-          steps {
-            sh 'env'
-            echo 'CI'
-            }
-           }
+   }
   }
-}
 
 
 
