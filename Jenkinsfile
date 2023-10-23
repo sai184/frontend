@@ -23,9 +23,15 @@ agent { label 'workstation' }
               branch 'main'
             }
           }
-     }
+           steps {
 
-   stage('deploy to production') {
+                  // sh 'npm test'
+                  echo 'CI'
+                }
+          }
+
+
+   stage('Release') {
      when {
               expression { env.TAG_NAME ==~ ".*" }
           }
