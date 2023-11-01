@@ -40,7 +40,7 @@ agent { label 'workstation' }
             steps {
               sh 'docker build -t  221453714752.dkr.ecr.us-east-1.amazonaws.com/frontend:${TAG_NAME} .'
               sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 221453714752.dkr.ecr.us-east-1.amazonaws.com'
-              sh 'docker PUSH 221453714752.dkr.ecr.us-east-1.amazonaws.com/frontend:${TAG_NAME} .'
+              sh 'docker push 221453714752.dkr.ecr.us-east-1.amazonaws.com/frontend:${TAG_NAME} .'
 
               //in first step docker build and next will authentaic with amazon ecr and finally we will push docker image
               }
