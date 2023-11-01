@@ -38,8 +38,11 @@ agent { label 'workstation' }
             }
             //if tag is there in this branch then only deploy to prod
             steps {
-              sh 'env'
-              echo 'CI'
+              sh 'docker build -t  221453714752.dkr.ecr.us-east-1.amazonaws.com/frontend:${TAG_NAME} .'
+              sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 221453714752.dkr.ecr.us-east-1.amazonaws.com'
+              sh 'docker PUSH 221453714752.dkr.ecr.us-east-1.amazonaws.com/frontend:${TAG_NAME} .'
+
+              #in first step docker build and next will authentaic with amazon ecr and finally we will push docker image
               }
              }
     }
